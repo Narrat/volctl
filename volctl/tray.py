@@ -206,7 +206,12 @@ class VolumeSlider:
 
     def set_position(self):
         a, screen, rect, orient = self.volctl.statusicon.get_geometry()
-        self.win.move(rect.x, rect.y + rect.height)
+
+        if rect.y < (screen.height() / 2):
+            self.win.move(rect.x, rect.y + rect.height)
+        else:
+            # Height: y_pos - (2*tray_height) - requested_height - (2*margin)
+            self.win.move(rect.x, rect.y - (2 * rect.height) - 128 - 12)
 
     def create_sliders(self):
         self.set_position()
